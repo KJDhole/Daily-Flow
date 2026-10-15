@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  daily-flow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: daily-flow:latest
+    container_name: daily-flow
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - TZ=Asia/Shanghai
+    volumes:
+      # Persistent SQLite database storage on host
+      - ./data:/app/data

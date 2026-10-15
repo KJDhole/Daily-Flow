@@ -1,0 +1,6 @@
+{
+  "name": "Daily Flow",
+  "description": "AI Native 个人每日计划管理网站，支持计划跨天延续、完整任务生命周期追踪与 AI 自动化操作",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

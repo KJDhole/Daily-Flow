@@ -1,0 +1,43 @@
+[Unit]
+Description=Daily Flow - AI Native Daily Planning Service
+After=network.target
+
+[Service]
+Type=simple
+User=dailyflow
+Group=dailyflow
+WorkingDirectory=/opt/daily-flow
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=TZ=Asia/Shanghai
+Environment=DAILY_FLOW_DATA_DIR=/var/lib/daily-flow/data
+
+# Run lightweight compiled production bundle with pure Node.js
+ExecStart=/usr/bin/node /opt/daily-flow/dist/server.js
+
+# Restart policy on failure
+Restart=always
+RestartSec=3
+
+# Resource & Memory limits (Tailored for 1C1G server)
+# Soft limit at 150MB, hard cap at 250MB
+MemoryHigh=150M
+MemoryMax=250M
+CPUQuota=90%
+
+# Security & Sandboxing
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/daily-flow/data
+
+# Journald logging limits
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=daily-flow
+
+[Install]
+WantedBy=multi-user.target
